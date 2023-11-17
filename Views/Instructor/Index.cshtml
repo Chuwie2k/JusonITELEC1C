@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Instructor>;
+
+<div class="text-center">
+    <h1 class="display-4">Instructor List</h1> <br>
+</div>
+
+<a class="btn btn-primary" asp-controller="Instructor" asp-action="AddInstructor">Add Instructor</a>
+
+<table class="table">
+
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Employment Status</td>
+        <td>Rank</td>
+        <td>Hiring Date</td>
+        <td>Show Details</td>
+        <td>Update</td>
+        <td>Delete</td>
+    </tr>
+
+    @foreach (var instructor in Model)
+    {
+        string status = @instructor.IsTenured == true ? "Permanent" : "Probationary";
+        <tr>
+            <td>@instructor.InstructorId</td>
+            <td>@instructor.InsFirst @instructor.InsLast</td>
+            <td>@status</td>
+            <td>@instructor.InstructorRank</td>
+            <td>@instructor.HiringDate</td>
+            <td><a class = "btn btn-light" asp-action="ShowDetail" asp-route-id="@instructor.InstructorId">Show Details</a></td>
+            <td><a class="btn btn-primary" asp-action="UpdateInstructor" asp-route-id="@instructor.InstructorId">Update Details</a></td>
+            <td><a class="btn btn-danger" asp-action="DeleteInstructor" asp-route-id="@instructor.InstructorId">Delete Instructor</a></td>
+
+        </tr>
+    }
+</table>@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
